@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "dev:server": "tsx watch src/server",
+    "dev:client": "wait-port 3000 && tsx watch src/client",
+    "dev": "run-p dev:* --print-label",
+    "start:server": "node build/server",
+    "start:client": "wait-port 3000 && node build/client",
+    "start": "run-p start:* --print-label"
+  },
+  "dependencies": {
+    "@trpc/client": "^11.0.0-rc.390",
+    "@trpc/server": "^11.0.0-rc.390",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "wait-port": "^1.1.0",
+    "yarn-run-all": "^3.1.1"
+  }
+}

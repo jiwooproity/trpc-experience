@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "outDir": "build",
+    "lib": ["ES2015", "DOM"],
+    "skipLibCheck": true,
+    "baseUrl": "."
+  },
+  "include": ["src/**/*.ts"]
+}
