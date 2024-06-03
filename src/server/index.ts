@@ -25,6 +25,10 @@ const router = t.router({
         const { input } = opts;
         db.movies.create(input);
       }),
+    delete: t.procedure.input(z.number()).query(async (opts) => {
+      const { input } = opts;
+      db.movies.delete(input);
+    }),
   },
 });
 

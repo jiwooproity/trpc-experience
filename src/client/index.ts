@@ -10,20 +10,20 @@ const trpc = createTRPCClient<Router>({
   ],
 });
 
-const load = async () => {
-  let movies = await trpc.movies.list.query();
-
+const loadAPI = async () => {
+  // SELECT: *
+  const movies = await trpc.movies.list.query();
   console.log("Movies: ", movies);
 
-  const searchMovie = await trpc.movies.search.query("모아나2");
+  // SELECT: WHERE
+  const movie = await trpc.movies.search.query("분노의 질주");
+  console.log("Search Movie: ", movie);
 
-  console.log("Search Movie: ", searchMovie);
+  // INSERT
+  await trpc.movies.create.query({ id: 3, title: "모아나2" });
 
-  await trpc.movies.create.query({ id: 5, title: "범죄도시" }).then(async () => {
-    movies = await trpc.movies.list.query();
-
-    console.log("Updated Movies: ", movies);
-  });
+  // DELETE
+  await trpc.movies.delete.query(3);
 };
 
-load();
+loadAPI();

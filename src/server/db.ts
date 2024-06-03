@@ -1,23 +1,26 @@
-import fs from "fs";
-import data from "./movies.json";
-import path from "path";
+import { selectMethod, insertMethod, deleteMethod } from "./query.js";
 
-type Movies = { id: number; title: string };
+export type Movies = { id: number; title: string };
 
-const movies: Movies[] = data;
 export const db = {
   movies: {
     all: async () => {
-      const dataBuffer = fs.readFileSync(path.resolve(__dirname, "./movies.json"));
-      const dataJson = dataBuffer.toString();
-      return JSON.parse(dataJson);
+      const query = "SELECT * FROM movies";
+      const movies = await selectMethod<Movies[]>(query);
+      return movies;
     },
     search: async (title: string) => {
-      return movies.find((movie) => movie.title === title);
+      const query = `SELECT * FROM movies WHERE title='${title}'`;
+      const movies = await selectMethod<Movies>(query);
+      return movies;
     },
     create: async (movie: Movies) => {
-      const concatMovie = movies.concat(movie);
-      fs.writeFileSync(path.resolve(__dirname, "./movies.json"), JSON.stringify(concatMovie));
+      const query = `INSERT INTO movies VALUES(${movie.id}, '${movie.title}')`;
+      insertMethod(query);
+    },
+    delete: async (id: number) => {
+      const query = `DELETE FROM movies WHERE id=${id}`;
+      deleteMethod(query);
     },
   },
 };
