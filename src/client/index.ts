@@ -24,6 +24,10 @@ const loadAPI = async () => {
 
   // DELETE
   await trpc.movies.delete.query(3);
+
+  // SELECT: USER, AUTH, WORK TABLE JOIN
+  const users = await trpc.users.list.query();
+  console.log("Users: ", users);
 };
 
 loadAPI();

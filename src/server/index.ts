@@ -15,12 +15,7 @@ const router = t.router({
       return await db.movies.search(input);
     }),
     create: t.procedure
-      .input(
-        z.object({
-          id: z.number(),
-          title: z.string(),
-        })
-      )
+      .input(z.object({ id: z.number(), title: z.string() }))
       .query(async (opts) => {
         const { input } = opts;
         db.movies.create(input);
@@ -28,6 +23,11 @@ const router = t.router({
     delete: t.procedure.input(z.number()).query(async (opts) => {
       const { input } = opts;
       db.movies.delete(input);
+    }),
+  },
+  users: {
+    list: t.procedure.query(async () => {
+      return await db.users.all();
     }),
   },
 });
