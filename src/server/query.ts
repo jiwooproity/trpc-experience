@@ -3,8 +3,8 @@ import DB_CONFIG from "./db-config.js";
 
 const connection = mysql.createConnection(DB_CONFIG);
 
-export const selectMethod = async <T>(query: string): Promise<T> => {
-  return await new Promise((resolve) => {
+export const selectMethod = <T>(query: string): Promise<T> => {
+  return new Promise((resolve) => {
     connection.query(query, (error, results) => {
       if (error) throw error;
       resolve(results);
